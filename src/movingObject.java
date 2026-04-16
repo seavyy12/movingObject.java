@@ -46,18 +46,60 @@ public class movingObject {
         }
     }
 
-    //falta implementar;
+   
    float distancia(){
-    return 0;
+    if(head == null) {
+        return 0;
+    }
+    Nodo auxNodo = head;
+    float totalDistance = 0;
+
+    while(auxNodo.next != null) {
+        String[] pos1 = auxNodo.posicion.split(",");
+        String[] pos2 = auxNodo.next.posicion.split(",");
+        float x1 = Float.parseFloat(pos1[0]);
+        float y1 = Float.parseFloat(pos1[1]);
+        float x2 = Float.parseFloat(pos2[0]);
+        float y2 = Float.parseFloat(pos2[1]);
+        totalDistance += Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
+        auxNodo = auxNodo.next;
+    }
+
+    return totalDistance;
    }
- // implementar esta funcion
+ 
+   
    boolean Intersecta(movingObject obj2) {
-    return false;
+      
+    if(this.head == null || obj2.head == null) {
+        return false;
+    }
+    
+    Nodo auxNodo1 = this.head;
+      Nodo auxNodo2 = obj2.head;
+
+      while(auxNodo1 != null && auxNodo2 != null) {
+        
+        if(auxNodo1.posicion.equals(auxNodo2.posicion)) {
+            return true;
+        }
+
+        if(auxNodo1.t < auxNodo2.t) {
+            auxNodo1 = auxNodo1.next;
+        } else {
+            auxNodo2 = auxNodo2.next;
+        }
+          
+
+      }
+        return false;
+
    }
 // falta implementar esta funcion
    boolean IntersectaRangeST() {
     return false;
    }
+
 }
 
 
