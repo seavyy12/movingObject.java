@@ -1,0 +1,28 @@
+///////////////Moving object///////////////
+
+La clase movingObject representa la trayectoria de un objeto en movimiento a través del tiempo. Utiliza
+una lista enlazada simple donde cada nodo almacena un instante de tiempo (t) y una coordenada geográfica (posicion).
+
+Funcionalidades
+
+Principalesinsertar(): Agrega un nuevo punto a la trayectoria de forma ordenada cronológicamente. Si el nuevo tiempo es menor que el de la cabeza, lo coloca al inicio; de lo contrario, recorre la lista hasta encontrar su posición correcta.
+
+Eliminar(): Busca un nodo por su valor de tiempo y lo remueve de la lista, reconectando los nodos adyacentes para no perder la cadena.
+
+distancia(): Extrae las coordenadas X e Y separando el String con .split(",") y convirtiéndolas con Float.parseFloat. 
+Luego, aplica la fórmula matemática de distancia entre cada par de puntos de la trayectoria y suma el total.
+
+InterseccionesIntersecta(): Compara la trayectoria actual con la de otro objeto. Devuelve true si ambos objetos coinciden en la misma posición exacta, optimizando la búsqueda al avanzar los punteros según el tiempo de cada uno.
+
+IntersectaRangeST(): Determina si el objeto estuvo dentro de un área rectangular en un rango de tiempo específico. Filtra los nodos que están dentro del intervalo de tiempo.Verifica si los puntos (vértices) están dentro del rectángulo.
+Calcula mediante álgebra vectorial si el segmento de línea entre dos puntos atraviesa alguna de las cuatro paredes del rectángulo, permitiendo detectar colisiones incluso si los puntos registrados caen fuera del área pero la trayectoria la cruza.
+
+
+Intrucciones:
+
+
+Ejecute la clase Main.
+Aparecerá un menú en la consola con 5 opciones. Ingrese el número de la prueba que desea ejecutar y presione Enter.
+Las opciones 2 y 3 evalúan exactamente los casos de prueba de intersección. Mediante un bloque if-else, el sistema imprime si el resultado de la función coincide con el esperado (TRUE o FALSE) según la trayectoria insertada. La opción 5 finaliza la ejecución.
+
+//aclaracion, el main es solo para pruebas;

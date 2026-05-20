@@ -1,3 +1,4 @@
+package TAREA_1;
 public class Nodo {
     public int t;
     public String posicion;

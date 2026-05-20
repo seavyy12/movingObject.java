@@ -1,0 +1,43 @@
+DOCUMENTACIÓN DEL TDA movingObject Y GUÍA DE PRUEBAS
+
+1. Estructura General del TDA
+Para resolver la tarea, implementé el TDA basándome en una lista simplemente enlazada construida desde cero.
+
+Utilizo una clase auxiliar Nodo que almacena el estado en un momento dado: guarda el instante de tiempo (int t), la coordenada bidimensional (String posicion separada por coma) y un puntero next.
+
+La clase principal movingObject identifica al objeto con su variable oid y mantiene el puntero head (cabeza) para iniciar el recorrido de la trayectoria.
+
+2. Lógica de los Métodos Implementados
+
+insertar(int t, String posicion): Para cumplir con la regla de que las trayectorias deben estar ordenadas por tiempo, este método no inserta los nodos simplemente al final. Utiliza un ciclo while para recorrer la lista y encontrar el "hueco" cronológico exacto. Así, si se ingresan tiempos en desorden, la lista siempre queda ordenada de menor a mayor automáticamente.
+
+Eliminar(int t): Recorre la lista buscando una coincidencia exacta de tiempo. Si la encuentra, reasigna el puntero del nodo anterior (prevNodo.next = auxNodo.next) para desvincular el nodo eliminado.
+
+distancia(): Extrae las coordenadas X e Y separando el String con .split(",") y convirtiéndolas con Float.parseFloat. Luego, aplica la fórmula matemática de distancia euclidiana entre cada par de puntos de la trayectoria y suma el total.
+
+Intersecta(movingObject obj2): Recorre las trayectorias de dos objetos en paralelo. Para hacerlo eficiente, el ciclo while avanza el puntero del objeto que tenga un tiempo menor. Solo devuelve true si ambos coinciden exactamente en el mismo tiempo y en la misma posición.
+
+IntersectaRangeST (Intersección con Área R y Tiempo T):  Lo resolví en un solo bloque siguiendo estos pasos:
+
+Filtro temporal: Primero verifico que el tramo entre el nodo actual y el siguiente se cruce temporalmente con el intervalo de tiempo buscado (t1 y t2).
+
+Filtro espacial directo: Separo las coordenadas y verifico si alguno de los dos extremos de ese segmento de trayectoria cayó directamente dentro de los límites del rectángulo. Si es así, retorna true.
+
+Filtro espacial de cruce: Si los puntos están afuera, cabe la posibilidad de que la trayectoria haya cruzado el rectángulo por el centro. Para evaluarlo, guardé las coordenadas de los 4 bordes del rectángulo en un arreglo bidimensional llamado bordes. Mediante un ciclo for, evalúo si el tramo cruzó alguna de las 4 paredes usando una fórmula analítica de intersección de líneas por determinantes. Si ocurre una intersección real en el segmento físico (donde los escalares 's' y 't_int' están entre 0 y 1), devuelve true.
+
+3. Sobre la Ejecución y la Clase Main
+
+Para facilitar la revisión de esta tarea, incluí una clase Main que funciona como entorno de pruebas y cuenta con un menú interactivo (switch) por consola.
+
+Justificación de los datos:
+Al arrancar el programa, decidí insertar directamente en el código los mismos datos que se muestran en el ejemplo de la "Figura 1" del enunciado. Los inserté a propósito en desorden cronológico (tiempos 5, 1, 10, 7) para que se pueda comprobar empíricamente que el método insertar los acomoda correctamente. Esto evita tener que escribirlos manualmente cada vez que se quiere probar el código.
+
+Instrucciones de uso:
+
+Asegúrese de tener compiladas todas las clases (Nodo, movingObject y Main).
+
+Ejecute la clase Main.
+
+Aparecerá un menú en la consola con 5 opciones. Ingrese el número de la prueba que desea ejecutar y presione Enter.
+
+Las opciones 2 y 3 evalúan exactamente los casos de prueba de intersección. Mediante un bloque if-else, el sistema imprime si el resultado de la función coincide con el esperado (TRUE o FALSE) según la trayectoria insertada. La opción 5 finaliza la ejecución.

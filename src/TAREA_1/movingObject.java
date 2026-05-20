@@ -1,3 +1,4 @@
+package TAREA_1;
 public class movingObject {
     private int oid;
     private Nodo head;
@@ -8,20 +9,23 @@ public class movingObject {
     }
 
     void insertar(int t, String posicion) {
-        if (head == null) {
-            head = new Nodo(t, posicion);
-        } else {
-            Nodo auxNodo = head;
-            Nodo newNode = new Nodo(t, posicion);
-            while (auxNodo.next != null) {
-                if (auxNodo.t > t && auxNodo.next.t < t) {
-                    newNode.next = auxNodo.next;
-                    auxNodo.next = newNode;
-                    return;
-                }
-                auxNodo = auxNodo.next;
-            }
-        }
+    Nodo newNode = new Nodo(t, posicion);
+
+    if (head == null || t < head.t) {
+        newNode.next = head;
+        head = newNode;
+        return;
+    }
+
+  
+    Nodo auxNodo = head;
+    while (auxNodo.next != null && auxNodo.next.t < t) {
+        auxNodo = auxNodo.next;
+    }
+
+    
+    newNode.next = auxNodo.next;
+    auxNodo.next = newNode;
     }
 
     void Eliminar(int t) {
